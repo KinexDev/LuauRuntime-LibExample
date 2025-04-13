@@ -10,6 +10,17 @@ add_subdirectory(thirdparty/luau)
 
 add_library(example SHARED "test.cpp" "test.h")
 
+target_link_libraries(example PRIVATE
+    "${PROJECT_SOURCE_DIR}/libs/Luau.Compiler.lib"
+    "${PROJECT_SOURCE_DIR}/libs/Luau.VM.lib"
+    "${PROJECT_SOURCE_DIR}/libs/Luau.Ast.lib"
+    raylib
+)
+
+target_include_directories(example PRIVATE
+    "${PROJECT_SOURCE_DIR}/include"
+)
+
 target_link_libraries(example PRIVATE Luau.VM Luau.Compiler)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
